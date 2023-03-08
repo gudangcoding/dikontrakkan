@@ -1,0 +1,7 @@
+{
+  "name": "dikontrakkan",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
