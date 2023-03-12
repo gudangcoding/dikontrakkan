@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>camera</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-avatar *ngIf="gambar">
+    <img #gambarnya  src="">
+  </ion-avatar>
+  <ion-button (click)="takePicture()" expand="block" shape="round">
+   foto
+  </ion-button>
+</ion-content>
