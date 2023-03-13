@@ -1,2 +1,4 @@
-#fcm
-https://www.npmjs.com/package/@kazion/fcm-node-http
+1 install web pack supaya preview gambar tampil di hmtl dengan type dataUrl
+npm i webpack
+2 storage menggunakan versi "@ionic/storage": "^2.1.3",
+3 install pwa camera untuk preview kamera
