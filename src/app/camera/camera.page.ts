@@ -1,5 +1,9 @@
-import { Component, OnInit,ViewChild,ElementRef  } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef  } from "@angular/core";
 import { Camera, CameraResultType } from '@capacitor/camera';
+import { restApi } from "src/provider/restApi";
+import { Buffer } from 'buffer';
+
+
 
 @Component({
   selector: 'app-camera',
@@ -9,8 +13,8 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 export class CameraPage implements OnInit {
   
  gambar:any=[];
- img:any;
-  constructor(elementRef: ElementRef) { }
+ img:any=[];
+  constructor(private api:restApi) { }
   @ViewChild('gambarnya') gambarnya!: ElementRef;
   
   ngOnInit(): void {
@@ -23,28 +27,56 @@ export class CameraPage implements OnInit {
       resultType: CameraResultType.DataUrl,
     }).then((res:any)=>{
       this.gambar  = res.dataUrl;
-      this.gambarnya.nativeElement.src = "data:image/jpeg;base64,"+this.gambar;
+      this.gambarnya.nativeElement.src = this.gambar;
       console.log(this.gambar);
     },(err)=>{
         console.log(err); 
     })
   }
+  
 
-   takePicture2()  {
+
+
+
+    takePicture2()  {
     const image =  Camera.getPhoto({
       quality: 90,
       allowEditing: true,
       resultType: CameraResultType.Uri
     }).then((res:any)=>{
       this.gambar  = res.webPath;
-      this.gambarnya.nativeElement.src = this.gambar;
-      console.log(this.gambar);
+      const blob =  fetch(res.webPath).then(r => r.blob());
+      
+      this.gambarnya.nativeElement.src = this.gambar; 
     },(err)=>{
         console.log(err); 
     });
   
     
   };
+  
+ 
+
+  
+
+  simpan(){
+    console.log(Blob);
+    
+  }
+
+  takepoto3(){
+    const image =  Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl
+    }).then((res:any)=>{
+      const hasil : string = Buffer.from(res.dataUrl, 'utf8').toString('base64');
+      this.gambarnya.nativeElement.src = hasil;
+      console.log(hasil); 
+    });
+    
+    
+  }
 }
 
 //https://jsmobiledev.com/article/ionic-camera/

@@ -5,10 +5,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-avatar *ngIf="gambar">
+  <!-- <ion-avatar *ngIf="gambar"> -->
     <img #gambarnya  src="">
-  </ion-avatar>
-  <ion-button (click)="takePicture()" expand="block" shape="round">
+  <!-- </ion-avatar> -->
+  <ion-button (click)="takepoto3()" expand="block" shape="round">
    foto
   </ion-button>
+
+  <ion-button (click)="simpan()" expand="block" shape="round">
+    simpan
+   </ion-button>
 </ion-content>

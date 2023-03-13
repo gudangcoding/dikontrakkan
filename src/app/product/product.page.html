@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>List Kontrakan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-padding">
+  <ion-card *ngFor="let post of product; let i=index">    
+    <ion-item>
+      <ion-avatar slot="start" position="start">
+        <img src="{{post.gambar}}">
+      </ion-avatar>
+      <ion-label>{{post.product_name}}</ion-label>
+    </ion-item>
+
+    <img src="{{post.gambar}}" width="100%">
+
+    <div>
+      <ion-button>
+        <ion-icon name="heart"></ion-icon> 
+          <!-- <ion-icon name="heart" *ngIf="post.suka==1" class="red"></ion-icon>
+          <ion-icon name="heart" *ngIf="post.suka==0"></ion-icon> -->
+      </ion-button>
+      <ion-button>
+         <ion-icon name="chatbubbles"></ion-icon>
+      </ion-button>
+    </div>
+
+    <ion-card-content>
+      <p> {{product.post}}</p>
+      <!-- <ion-button *ngIf="post.jml_komentar!=0" (click)="openComment(i)">
+        <small>Tampilkan  komentar</small>
+      </ion-button><br>      -->
+      <ion-note><small>{{product.created_at}}</small></ion-note>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+     <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab id="open-modal" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Tambah Kontrakan</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="modal.dismiss()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>Jenis Kontrakan</ion-label>
+            <ion-select [(ngModel)]="cat_id">
+              <ion-select-option value="Rumah">Rumah</ion-select-option>
+              <ion-select-option value="Kios">Kios</ion-select-option>
+              <ion-select-option value="Ruko">Ruko</ion-select-option>
+              <ion-select-option value="Gudang">Gudang</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Nama Kontrakan</ion-label>
+            <ion-input [(ngModel)]="name" type="text" ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Deskripsi</ion-label>
+            <ion-textarea [(ngModel)]="desc" rows="10"></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Harga</ion-label>
+            <ion-input [(ngModel)]="price" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+           
+              <img #gambarnya  src="">
+            
+            <ion-label>Foto</ion-label>
+            <ion-input [(ngModel)]="poto" type="hidden" value="{{gambar}}"></ion-input>
+            <ion-button  shape="round" (click)="takepoto3()">
+              Ambil Foto
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Url Video</ion-label>
+            <ion-input [(ngModel)]="video_url" type="url"></ion-input>
+          </ion-item>
+          <ion-button (click)="simpan()" expand="block"  mode="ios">
+            Simpan
+          </ion-button>
+        </ion-list>
+        
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

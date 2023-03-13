@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export class restApi{
-    server : string = "https://reqres.in/api/";
+    //server : string = "https://reqres.in/api/";
+    server : string = "https://kontrakan.tukangrenov.id/api/";
 
     constructor(private http : HttpClient){}
 

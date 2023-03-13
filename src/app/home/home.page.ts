@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { restApi } from 'src/provider/restApi';
-import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { Component } from "@angular/core";
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
+import { restApi } from "src/provider/restApi";
 
 
 @Component({
