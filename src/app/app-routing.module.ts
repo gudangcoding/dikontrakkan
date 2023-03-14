@@ -35,6 +35,10 @@ const routes: Routes = [
     path: 'beranda',
     loadChildren: () => import('./beranda/beranda.module').then( m => m.BerandaPageModule)
   },
+  {
+    path: 'chat',
+    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+  },
 ];
 
 @NgModule({

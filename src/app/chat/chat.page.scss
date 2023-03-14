@@ -1,0 +1,29 @@
+ion-title,ion-segmen-button,h2{
+    font-weight: 600;
+}
+
+ion-segment{
+    --background: #128c7e;
+    ion-segment-button{
+        --color: #87c5be;
+        --color-checked:white;
+    }
+    ion-segment-button:firt-of-type{
+        --padding-end:0 ;
+        --padding-start:0 ;
+        min-width: 16px;
+    }
+}
+
+ion-fab-button{
+    --background:#00cc3f;
+}
+p ion-icon{
+    font-size: 16px;
+    vertical-align: middle;
+    
+}
+
+.read{
+    color: #43b5af;
+}
