@@ -12,70 +12,95 @@
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-segment value="Chat" class="ion-no-border" lines="none">
+  <ion-segment value="Chat" class="ion-no-border" lines="none"  [(ngModel)]="segment">
     <ion-segment-button value="camera">
       <ion-icon name="camera"></ion-icon>
     </ion-segment-button>
-    <ion-segment-button value="Chat">
+    <ion-segment-button value="chat">
       <ion-label>Chats</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Status">
+    <ion-segment-button value="status">
       <ion-label>Status</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="Call">
+    <ion-segment-button value="call">
       <ion-label>Call</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 
 <ion-content>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="chatbox-ellipses"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  
 
   <div class="ion-padding">
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://awsimages.detik.net.id/visual/2018/01/17/1e2a302a-7f49-405d-aacc-36f6a3bb361f_43.jpeg?w=450&q=90" />
-      </ion-avatar>
-      <ion-label>
-        <h2>Celine Dion</h2>
-        <p><ion-icon class="read" name="checkmark-done"></ion-icon>Halo,..Sayang dah maem blom</p>
-      </ion-label>
-      <ion-label slot="end" class="ion-text-right">
-        <p>14-03-2023</p>
-        <p>&nbsp;</p>
-      </ion-label>
-    </ion-item>
 
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://asset.kompas.com/crops/aHvrspJoOSTapZ2Tf53vrRAQHk4=/0x0:1965x1310/750x500/data/photo/2022/06/28/62baf42a3c32c.jpg" />
-      </ion-avatar>
-      <ion-label>
-        <h2>Putin</h2>
-        <p><ion-icon class="read" name="checkmark-done"></ion-icon> Mas, 2024 mau maju gak?</p>
-      </ion-label>
-      <ion-label slot="end" class="ion-text-right">
-        <p>14-03-2023</p>
-        <p>&nbsp;</p>
-      </ion-label>
-    </ion-item>
+    <div [ngSwitch]="segment">
+      <div *ngSwitchCase="'camera'">
+        <div class="kosong">
+          <ion-avatar>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png" />
+          </ion-avatar>
+          <ion-label>Belum ada foto yang anda posting</ion-label>
+        </div>
+      </div>
+    
+      <div *ngSwitchCase="'chat'">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="https://awsimages.detik.net.id/visual/2018/01/17/1e2a302a-7f49-405d-aacc-36f6a3bb361f_43.jpeg?w=450&q=90" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Celine Dion</h2>
+            <p><ion-icon class="read" name="checkmark-done"></ion-icon>Halo,..Sayang dah maem blom</p>
+          </ion-label>
+          <ion-label slot="end" class="ion-text-right">
+            <p>14-03-2023</p>
+            <p>&nbsp;</p>
+          </ion-label>
+        </ion-item>
+    
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="https://asset.kompas.com/crops/aHvrspJoOSTapZ2Tf53vrRAQHk4=/0x0:1965x1310/750x500/data/photo/2022/06/28/62baf42a3c32c.jpg" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Putin</h2>
+            <p><ion-icon class="read" name="checkmark-done"></ion-icon> Mas, 2024 mau maju gak?</p>
+          </ion-label>
+          <ion-label slot="end" class="ion-text-right">
+            <p>14-03-2023</p>
+            <p>&nbsp;</p>
+          </ion-label>
+        </ion-item>
+    
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="https://akcdn.detik.net.id/visual/2021/04/26/presiden-jokowi-menyampaikan-duka-cita-kri-nanggala-2_169.jpeg?w=650" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Jokowi</h2>
+            <p><ion-icon class="read" name="checkmark-done"></ion-icon>Nep, Mau nyalon gak?</p>
+          </ion-label>
+          <ion-label slot="end" class="ion-text-right">
+            <p>14-03-2023</p>
+            <p>&nbsp;</p>
+          </ion-label>
+        </ion-item>
 
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="https://akcdn.detik.net.id/visual/2021/04/26/presiden-jokowi-menyampaikan-duka-cita-kri-nanggala-2_169.jpeg?w=650" />
-      </ion-avatar>
-      <ion-label>
-        <h2>Jokowi</h2>
-        <p><ion-icon class="read" name="checkmark-done"></ion-icon>Nep, Mau nyalon gak?</p>
-      </ion-label>
-      <ion-label slot="end" class="ion-text-right">
-        <p>14-03-2023</p>
-        <p>&nbsp;</p>
-      </ion-label>
-    </ion-item>
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button>
+            <ion-icon name="chatbox-ellipses"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </div>
+  
+      <div *ngSwitchCase="'status'">
+        Anda sedang tidak galau hari ini ...
+      </div>
+      <div *ngSwitchCase="'call'">
+        Belum ada panggilan dari manapun
+      </div>
+    </div>
+
+    
   </div>
 </ion-content>
