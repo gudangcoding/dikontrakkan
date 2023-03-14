@@ -13,9 +13,9 @@ import { Buffer } from 'buffer';
 })
 export class CameraPage implements OnInit {
   
-  gambar:any="";
+  gambar: any = "";
   hasil : any;
-  blob:any;
+  blob  : any = "";
   constructor(
     private api:restApi, 
     // private storage: Storage
@@ -29,14 +29,23 @@ export class CameraPage implements OnInit {
   }
 
   
-  sendpoto(){
+  sendDataUri(){
      let body = {
-      poto:this.gambar
+      poto:this.blob.__zone_symbol__value
      } 
      this.api.post(body,'cek.php').subscribe((res:any)=>{
       //console.log(res);
      })
   }
+
+  sendDataUrl(){
+    let body = {
+     poto:this.gambar
+    } 
+    this.api.post(body,'cek.php').subscribe((res:any)=>{
+     //console.log(res);
+    })
+ }
 
 
 
@@ -48,7 +57,8 @@ export class CameraPage implements OnInit {
       resultType: CameraResultType.DataUrl
     });
     image.then((res:any)=>{
-      this.gambar = res.dataUrl;this.gambarnya.nativeElement.src = this.gambar;
+      this.gambar = res.dataUrl;
+      this.gambarnya.nativeElement.src = this.gambar;
       console.log(this.gambar); 
     })
     
@@ -63,10 +73,7 @@ export class CameraPage implements OnInit {
     image.then((res:any)=>{
       this.gambar = res.webPath;
       this.gambarnya.nativeElement.src = this.gambar;
-      // let blob:any =  fetch(this.gambar).then(r => r.blob());
-      // let formData = new FormData();
-      // formData.append("poto", blob);
-      this.blob=this.readAsBase64(this.gambar);
+      this.blob = this.readAsBase64(this.gambar);
       console.log(this.blob); 
     })
   }

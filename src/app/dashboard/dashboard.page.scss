@@ -1,7 +1,18 @@
-ion-tab-bar,ion-tab-button{
-    background-color: aqua;
+ion-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
 }
 
+ion-content{
+    border-radius: 50px 50px 0 0;
+}
+// ion-tab-bar{
+//     --background:linear-gradient(45deg,green,rgb(128, 187, 128),yellow);
+// }
+// ion-tabbar-button{
+//     color: #ffffff;
+// }
 ion-tabs{
-    background: rgb(3, 117, 12);
+    // border-radius: 50px 50px 0 0;
+    background:linear-gradient(45deg,green,rgb(128, 187, 128),yellow);
 }

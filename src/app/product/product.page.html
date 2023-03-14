@@ -7,9 +7,9 @@
 <ion-content class="content-padding">
   <ion-card *ngFor="let post of product; let i=index">    
     <ion-item>
-      <ion-avatar slot="start" position="start">
-        <img src=" {{ post.gambar}}">
-      </ion-avatar>
+      <!-- <ion-avatar slot="start" position="start"> -->
+        <img src=" {{ server+post.gambar}}">
+      <!-- </ion-avatar> -->
       <ion-label>{{post.product_name}}</ion-label>
     </ion-item>
 
