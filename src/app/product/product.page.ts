@@ -11,6 +11,7 @@ import { Buffer } from 'buffer';
 })
 export class ProductPage implements OnInit {
   gambar:any=[];
+  img:string="";
   gambarDisplay:any=[];
   image:string="";
   imageDisplay:string="";
@@ -31,32 +32,33 @@ export class ProductPage implements OnInit {
     private api : restApi, 
     private storage:Storage,
     ) {
-    this.server = api.server;
+    this.server = this.api.server;
+    this.image = Buffer.from(this.gambar, 'utf8').toString('base64');
    }
 
   ngOnInit() {
+    
     this.product = [];
     this.start = 0;
-    // this.storage.get('member').then((res)=>{
-    //   this.anggota = res;
-      this.load();
-    // });
+    this.storage.get('member').then((res)=>{
+    this.anggota = res;
+    this.load();
+   });
   }
 
   load(){    
     return new Promise(resolve => {  
       let body = {
-        // username : this.anggota.username,
-        // password : this.anggota.password,
-        // member: this.anggota.id_member,
-        // aksi : 'tampil',
+        username : this.anggota.username,
+        password : this.anggota.password,
+        member: this.anggota.id_member,
         start: this.start,
         limit: this.perpage
       };
 
       this.api.post(body, 'index.php?m=product').subscribe((res:any) => {
         console.log(res.result);
-        
+        // this.image = 'data:image/jpeg;base64,' + this.imagebase64;
         for(let post of res.result){
           this.product.push(post);
         }
@@ -76,26 +78,17 @@ export class ProductPage implements OnInit {
     const image =  Camera.getPhoto({
       quality: 90,
       allowEditing: true,
-      resultType: CameraResultType.DataUrl,
-    }).then((res:any)=>{
-      this.gambar  = res.dataUrl;
+      resultType: CameraResultType.Uri,
+    });
+
+    image.then((res:any)=>{
+      this.gambar  = res.webPath;
       this.gambarnya.nativeElement.src = this.gambar;
       console.log(this.gambar);
     },(err)=>{
         console.log(err); 
     });  
     
-    //display gambar
-    const imageDisplay =  Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Uri
-    }).then((res:any)=>{
-      this.gambarDisplay  = res.webPath;
-      console.log(this.gambarDisplay);
-    },(err)=>{
-        console.log(err); 
-    });
   }
 
   simpan(){
@@ -104,7 +97,7 @@ export class ProductPage implements OnInit {
       name:this.name,
       desc:this.desc,
       price:this.price,
-      image:this.gambar,
+      image:this.image,
       video_url:this.video_url
     }
     this.api.post(body,'index.php?m=product&a=post').subscribe((res:any)=>{
@@ -113,7 +106,7 @@ export class ProductPage implements OnInit {
     });
   }
 
-  takepoto3(){
+  ambilfoto2(){
     const image =  Camera.getPhoto({
       quality: 90,
       allowEditing: true,
@@ -122,9 +115,9 @@ export class ProductPage implements OnInit {
     });
     image.then((res:any)=>{
       this.gambar = res.dataUrl;
-      this.image = Buffer.from(res.dataUrl, 'utf8').toString('base64');
       this.gambarnya.nativeElement.src = this.gambar;
-      console.log(this.gambar); 
+      this.image = Buffer.from(this.gambar, 'utf8').toString('base64');
+      console.log(this.image); 
       //return hasil;
     })
   }

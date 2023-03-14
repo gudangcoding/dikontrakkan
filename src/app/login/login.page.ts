@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { restApi } from 'src/provider/restApi';
 
@@ -15,19 +17,37 @@ export class LoginPage implements OnInit {
   otp:any;
   username:any="";
   password:any="";
-  constructor(private api:restApi,private storage:Storage) { }
+  constructor(
+    private api:restApi,
+    private storage:Storage,
+    private router: Router,
+    private alertCtrl : AlertController) { }
 
   ngOnInit() {
   }
 
   login(){
-    let body = {
-      username : this.username,
-      password : this.password
+    if(/^[a-zA-Z0-9]+$/.test(this.username)){
+      if(this.username != "" && this.password != ""){
+        let body = {
+          username: this.username,
+          password: this.password,
+        };
+
+        this.api.post(body, 'login.php').subscribe((data:any) => {
+          if(data.success){
+             this.storage.set('member', data.result);
+             this.router.navigate(['home']);
+          }
+          else this.notif('Error', data.msg);
+          console.log(data);
+        });
+      }else{
+        this.notif('Error', 'Username atau Password kosong!');
+      }
+    }else{
+      this.notif('Error', 'Username tidak valid!');
     }
-    this.api.post(body,'login.php').subscribe((res:any)=>{
-      console.log(res); 
-    })
   }
 
   daftar(){
@@ -54,5 +74,15 @@ export class LoginPage implements OnInit {
 
   kirimOTP(){
 
+  }
+
+  async notif(judul:any,message:any) {
+    const alert = await this.alertCtrl.create({
+      header: judul,
+      message: message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 }

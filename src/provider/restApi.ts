@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 export class restApi{
     //server : string = "https://reqres.in/api/";
     server : string = "https://kontrakan.tukangrenov.id/api/";
+    server3 : string = "http://localhost/appictserver/";
 
     constructor(private http : HttpClient){}
 

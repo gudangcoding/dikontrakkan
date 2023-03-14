@@ -1,12 +1,14 @@
-<ion-content id="konten" class="ion-padding">
+<ion-content id="konten" class="ion-padding" color="primary">
+
   <ion-avatar class="gambar">
-    <img src="../../assets/blank.jpg">
+    <img src="../../assets/logo2.png">
   </ion-avatar>
-  
+  <ion-label position="stacked">Username</ion-label>
   <ion-input type="text" [(ngModel)]="username"></ion-input>
+  <ion-label position="stacked">Password</ion-label>
   <ion-input type="password" [(ngModel)]="password"></ion-input>
 
-  <ion-button mode="ios" (click)="login()" expand="full">
+  <ion-button color="success" mode="ios" (click)="login()" expand="full">
     Login
   </ion-button>
 
